@@ -1,8 +1,11 @@
 import { Button, Navbar,Container, Stack } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 
-const Navigator = () => {
+// import Cart from './Cart';
 
+const Navigator = (props) => {
+console.log(props);
+ 
     return (<Stack>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant='dark'>
         <Container className='justify-content-center'>
@@ -19,7 +22,7 @@ const Navigator = () => {
             </Nav>
           {/* </Navbar.Collapse> */}
         </Container>
-        <Button className='justify-content-end'>Cart</Button>
+        <Button className='justify-content-end' onClick={props.show1} >Cart</Button>
       </Navbar>
       <Navbar className='bg-secondary  variant-primary justify-content-center  border '>
        <Navbar.Brand><h1>The Generics</h1></Navbar.Brand>
