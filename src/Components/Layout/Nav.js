@@ -1,6 +1,6 @@
 import { Button, Navbar,Container, Stack } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
-
+import { NavLink } from 'react-router-dom/cjs/react-router-dom';
 // import Cart from './Cart';
 
 const Navigator = (props) => {
@@ -11,15 +11,15 @@ console.log(props);
         <Container className='justify-content-center'>
           {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
           {/* <Navbar.Collapse id="responsive-navbar-nav"> */}
-            <Nav >
+      
               <Nav.Link href="#deets" variant="white"><h4>Home</h4></Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
+              <NavLink to="/Images">
               <h4> Store</h4> 
-              </Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
+              </NavLink>&nbsp;&nbsp;&nbsp;
+              <NavLink  to="/About">
               <h4>   About</h4> 
-              </Nav.Link>
-            </Nav>
+              </NavLink>
+          
           {/* </Navbar.Collapse> */}
         </Container>
         <Button className='justify-content-end' onClick={props.show1} >Cart</Button>
