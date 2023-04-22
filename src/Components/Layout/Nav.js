@@ -12,7 +12,7 @@ console.log(props);
           {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
           {/* <Navbar.Collapse id="responsive-navbar-nav"> */}
       
-              <Nav.Link href="#deets" variant="white"><h4>Home</h4></Nav.Link>
+              <NavLink to="/Home" ><h4>Home</h4></NavLink>&nbsp;&nbsp;&nbsp;
               <NavLink to="/Images">
               <h4> Store</h4> 
               </NavLink>&nbsp;&nbsp;&nbsp;

@@ -7,6 +7,7 @@ import CartProvider from "./Components/store/CartProvider";
 import Footer from "./Components/Layout/footer"
 import {Route,Switch} from "react-router-dom";
 import About from "./Components/RouterComponents/About";
+import Home from "./Components/RouterComponents/ImageItem/Home";
 // import ThemeProvider from 'react-bootstrap/ThemeProvider'
 // import Navigator1 from "./Components/Nav2";
 const App=()=>{
@@ -25,6 +26,7 @@ const App=()=>{
   <Cart show3={preshow} show2={handleClose} />
     <Navigator show1={handleShow} />
     <Switch>
+      <Route exact path="/Home"  component={Home} />
       <Route exact path="/About" component={About} />
       <Route exact path="/Images" component={Images}/>
     </Switch>
