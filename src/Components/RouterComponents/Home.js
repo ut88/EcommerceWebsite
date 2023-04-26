@@ -5,13 +5,13 @@ const Home=()=>{
     return(<>
      {/* <div className="bg-primary border"></div> */}
      <div className="text-center"><h1>Tours</h1></div>
-     <div>
-            {/* <div className={classes.tour_items}>
-                <span className={classes.date}>JUL16</span>
-                <span className={classes.place}>DETROIT, MI</span>
-                <span className={classes.spec-place}>DTE ENERGY MUSIC THEATRE</span>
-                <button className={classes.btn}>BUY TICKETS</button>
-            </div> */}
+     <div className="text-center">
+            <div className="tour_items">
+                <span >JUL16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span >DETROIT, MI</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span >DTE ENERGY MUSIC THEATRE</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button className="bg-primary">BUY TICKETS</button>
+            </div><hr />
             <div className="tour-item">
                 <span class="tour-date">JUL19</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span class="tour-place">TORONTO,ON</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

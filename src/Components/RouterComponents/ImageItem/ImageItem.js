@@ -10,11 +10,11 @@ const ImageItem= (props)=>{
 
     const cartCtx=useContext(CartContext);
 
-    const pk=()=>{
-        // console.log(cartCtx)
-        cartCtx.setCartContext1({
+    const pk=(props)=>{
+        
+        cartCtx.addItem({
 
-            key:props.id,
+            id:props.id,
 
             title: props.title,
     
@@ -22,11 +22,14 @@ const ImageItem= (props)=>{
     
             imageUrl: props.imageUrl,
 
-            quantity:props.quantity
+            subHeading:props.subHeading,
+
+            // quantity:props.quantity
     
         })  
+        // console.log(cartCtx.items);
     }
-    console.log(cartCtx)
+    // console.log(cartCtx.items)
   return(<>
        <Container  >
              <Row >

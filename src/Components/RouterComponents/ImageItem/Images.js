@@ -5,7 +5,7 @@ import ImageItem from "./ImageItem";
 const productsArr = [
 
     {
-        key:Math.random().toString(),
+        id:'m1',
 
         title: 'Colors',
 
@@ -13,12 +13,12 @@ const productsArr = [
 
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
 
-        subHeading:'Album 1'
+        subHeading:'Album 1',
 
     },
 
     {
-        key:Math.random().toString(),
+        id:'m2',
 
         title: 'Black and white Colors',
 
@@ -26,12 +26,12 @@ const productsArr = [
 
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
 
-        subHeading:'Album 2'
+        subHeading:'Album 2',
 
     },
 
     {
-        key:Math.random().toString(),
+        id:'m3',
 
         title: 'Yellow and Black Colors',
 
@@ -39,12 +39,12 @@ const productsArr = [
 
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
 
-        subHeading:'Album 3'
+        subHeading:'Album 3',
 
     },
 
     {
-        key:Math.random().toString(),
+        id:'m4',
 
         title: 'Blue Color',
 
@@ -52,16 +52,16 @@ const productsArr = [
 
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
 
-        subHeading:'Album 4'
+        subHeading:'Album 4',
 
     }
 
 ]
-const Imager = () => {
- 
-    const k= productsArr.map((k1)=>( <ImageItem title={k1.title} price={k1.price} imageUrl={k1.imageUrl} subHeading={k1.subHeading} id={k1.key} key={k1.key}/>
+const Imager = (props) => {
+    // console.log(Math.random().toString());console.log("productArr[1].id")
+    const k= productsArr.map((k1)=>( <ImageItem title={k1.title} price={k1.price} imageUrl={k1.imageUrl}  subHeading={k1.subHeading} key={k1.id} id={k1.id} />
     ))
-  
+    // console.log(k);
     return (<>{k}</> )
     // return (<Stack gap={20}>
     //     <div className="variant-dark">
