@@ -1,6 +1,6 @@
 import { Button, Navbar,Container, Stack } from 'react-bootstrap';
 // import Nav from 'react-bootstrap/Nav';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import Cart from './Cart';
 
 const Navigator = (props) => {

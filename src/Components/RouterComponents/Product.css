@@ -1,0 +1,15 @@
+.geeks1 {
+    width: 900px;
+    height: 400px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.geeks1 img {
+    width: 100%;
+    transition: 0.5s all ease-in-out;
+}
+
+.geeks1:hover img {
+    transform: scale(1.5);
+}

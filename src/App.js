@@ -9,6 +9,8 @@ import {Route,Switch} from "react-router-dom";
 import About from "./Components/RouterComponents/About";
 import Home from "./Components/RouterComponents/Home";
 import ContactUs from "./Components/RouterComponents/ContactUs";
+import Product from "./Components/RouterComponents/Product";
+import {Routes} from "react-router-dom";
 // import ThemeProvider from 'react-bootstrap/ThemeProvider'
 // import Navigator1 from "./Components/Nav2";
 const App=()=>{
@@ -26,12 +28,15 @@ const App=()=>{
     <Stack gap={4}>
     <Cart show3={preshow} show2={handleClose} />
     <Navigator show1={handleShow} />
-    <Switch>
-      <Route exact path="/Home"  component={Home} />
-      <Route exact path="/About" component={About} />
-      <Route exact path="/AvailableProduct" component={Images}/>
-      <Route exact path ="/ContactUs"  component={ContactUs}/>
-    </Switch>
+    
+    <Routes>
+      <Route exact path="/Home"  element={<Home />} />
+      <Route exact path="/About" element={<About />} />
+      <Route exact path="/AvailableProduct" element={<Images />}/>
+      <Route exact path ="/ContactUs"  element={<ContactUs />}/>
+      <Route exact path ="/product"  element={<Product />}/>
+      </Routes>
+    
     {/* <Images/> */}
     <Footer />
     </Stack>
