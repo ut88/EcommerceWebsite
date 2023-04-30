@@ -11,12 +11,10 @@ import Home from "./Components/RouterComponents/Home";
 import Login from "./Components/RouterComponents/ContactUs";
 import Product from "./Components/RouterComponents/Product";
 import {Routes} from "react-router-dom";
-import { Navigate } from "react-router-dom";
 const App=()=>{
   const [preshow, setShow] = useState(false);
   const authCtx =  useContext(CartContext)
   const handleShow = () =>{ 
-    console.log("hi");
     setShow(true);
   }
   const handleClose = () =>{
@@ -24,7 +22,7 @@ const App=()=>{
 }
   return (
     <Stack gap={4}>
-    <Cart show3={preshow} show2={handleClose} />
+    {preshow &&<Cart show2={handleClose} />}
     <Navigator show1={handleShow} />
     {!authCtx.isLoggedIn && <Login />}
     <Routes>

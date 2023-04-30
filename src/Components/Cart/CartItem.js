@@ -1,24 +1,43 @@
-// import Cart from "./Cart";
-// import Container from 'react-bootstrap/Container';
-// import Row from 'react-bootstrap/Row';
-import Image from 'react-bootstrap/Image';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import { Container, Row } from "react-bootstrap";
-import { Modal } from 'react-bootstrap';
-const CartItem= (props)=>{
-  console.log("CartItem")
-   return(
-   <Modal show={props.val} onHide={!props.val}><h1>hello</h1>
-   <Container>
-   <Row>
-    <Col><span><Image src={props.imageUrl} thumbnail />&nbsp;{props.title}</span> </Col>
-    <Col>{props.price}</Col>
-    <Col>{props.quantity} &nbsp;
-    <Button variant="danger">Remove</Button></Col>
-  </Row>
-  </Container><hr />
-  </Modal>)
-}
+import React, { useContext } from "react";
+import CartContext from "../store/CartContext";
+import { Row, Col, Card , Button} from "react-bootstrap";
+const CartItem = () => {
+  const details = useContext(CartContext);
+  let total = 0;
+  function remove(e){
+    details.removeItemFromCart(e.target.id)
+  }
+  return (
+    <>
+      {details.items.map((item) => {
+        total += Number(item.Qty) * item.price;
+        return (
+          <>
+            {item.Qty > 0 && (
+              <Row row-cols-3 className="align-items-center">
+                <Col className="d-flex align-items-center ">
+                  <Col>
+                    <Card.Img
+                      variant="left"
+                      src={item.imageUrl}
+                      style={{ width: "5rem" }}
+                    />
+                  </Col>
+                  <Col>{item.title}</Col>
+                </Col>
+                <Col>${item.price}</Col>
+                <Col className="d-flex align-items-center ">
+                    <Col>{item.Qty}</Col>
+                    <Button variant='danger' id={item.id} onClick={remove}>REMOVE</Button>
+                </Col>
+              </Row>
+            )}
+          </>
+        );
+      })}
+      <span className="text-end">Total Price:{total}</span>
+    </>
+  );
+};
 
 export default CartItem;

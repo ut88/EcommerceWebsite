@@ -9,29 +9,9 @@ import "./ImageItem.css"
 import { Link } from "react-router-dom"
 const ImageItem = (props) => {
 
-    const cartCtx = useContext(CartContext);
-
-    const pk = (props) => {
-
-        cartCtx.addItem({
-
-            id: props.id,
-
-            key:props.key,
-
-            title: props.title,
-
-            price: props.price,
-
-            imageUrl: props.imageUrl,
-
-            subHeading: props.subHeading,
-
-            review:props.review,
-
-        })
-
-    
+    const details = useContext(CartContext);
+    function addItemToCart(e) {
+      details.addItemToCart(e.target.id);
     }
 
   
@@ -62,9 +42,10 @@ imageUrl: props.imageUrl,
 subHeading: props.subHeading,
 
 review:props.review,
+Qty:props.Qty
 
 }}} >See Details</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Button variant="primary" onClick={pk} size="lg" >Add To Cart</Button></div>
+            <Button variant="primary" onClick={addItemToCart} size="lg" id={props.id} >Add To Cart</Button></div>
             </Row>
         </Container></>)
 }

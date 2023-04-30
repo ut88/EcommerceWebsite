@@ -1,5 +1,5 @@
 import Row from "react-bootstrap/Row";
-import { Image } from "react-bootstrap";
+
 
 import ImageItem from "./ImageItem";
 const productsArr = [
@@ -47,6 +47,8 @@ const productsArr = [
 
         review:"Best",
 
+        Qty:0
+
     },
 
     {
@@ -62,6 +64,8 @@ const productsArr = [
 
         review:"Top-Notch",
 
+        Qty:0
+
     }
 
 ]
@@ -74,7 +78,8 @@ const Imager = (props) => {
         subHeading={k1.subHeading} 
         key={k1.id}
          id={k1.id}
-         review={k1.review} />
+         review={k1.review}
+         Qty={k1.Qty} />
     ))
  
     return (<><h1 className="text-center">Music</h1>

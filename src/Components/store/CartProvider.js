@@ -1,75 +1,115 @@
 import CartContext from "./CartContext";
-import { useReducer } from "react";
 import { useState } from "react";
 
-const defaultCartState={
-    items:[],
-    totalAmount:0
-}
-
-const cartReducer=(state,action)=>{
-  if(action.type==='Add'){
-    const updatedTotalAmount=state.totalAmount+action.item.price*action.item.amount;
-    const existingCartItemIndex =state.items.findIndex(
-        (item)=> item.id === action.item.id);
-    const existingCartItem =state.items[existingCartItemIndex]
-    let updatedItems;
-    if(existingCartItem){
-        const updatedItem={
-            ...existingCartItem,
-            amount:existingCartItem.amount +action.item.amount,
-        }
-        updatedItems=[...state.items];
-        updatedItems[existingCartItem]=updatedItem;
-    }else{
-        updatedItems=state.items.concat(action.item);
-    }
-    return{
-        items:updatedItems,
-        totalAmount:updatedTotalAmount
-    }
-  }
-   if(action.type==='Remove'){
-     const existingCartItemIndex=state.items.findIndex(
-        (item)=>item.id=== action.id);
-       const existingItem=state.items[existingCartItemIndex];
-       const updatedTotalAmount=state.totalAmount-existingItem.price;
-       let updatedItems;
-       if(existingItem.amount===1){
-          updatedItems=state.items.filter(item=>item.id!==action.id); 
-       }else{
-         const updatedItem={...existingItem,amount:existingItem.amount-1};
-          updatedItems=[...state.item];
-          updatedItems[existingCartItemIndex]=updatedItem;
-        }
-        return{
-            items:updatedItems,
-            totalAmount:updatedTotalAmount
-        }
-   } 
-   return defaultCartState;
-}
-
 const CartProvider = props=>{
+    const[cartOpen,setCartOpen]=useState(false)
+    const[data,setData]=useState([
+
+        {
+            id:'m1',
+    
+            title: 'Colors',
+    
+            price: 100,
+    
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
+    
+            subHeading:'Album 1',
+    
+            review:"Awesome",
+            Qty:0
+    
+        },
+    
+        {
+            id:'m2',
+    
+            title: 'Black and white Colors',
+    
+            price: 50,
+    
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
+    
+            subHeading:'Album 2',
+    
+            review:"Good",
+
+            Qty:0
+    
+        },
+    
+        {
+            id:'m3',
+    
+            title: 'Yellow and Black Colors',
+    
+            price: 70,
+    
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
+    
+            subHeading:'Album 3',
+    
+            review:"Best",
+
+            Qty:0
+    
+        },
+    
+        {
+            id:'m4',
+    
+            title: 'Blue Color',
+    
+            price: 100,
+    
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
+    
+            subHeading:'Album 4',
+    
+            review:"Top-Notch",
+
+            Qty:0
+    
+        }
+      
+    ])
+    function showCartHandler(){
+        if(cartOpen){
+          setCartOpen(false)
+        }else{
+          setCartOpen(true)
+        }
+    }
+    function addItemToCartHandler(id) {
+      const addItem=data.filter((item)=>{
+        console.log(item);
+        if(item.id===(id)){
+          return item.Qty=Number(item.Qty)+1
+        }
+        return item
+        
+      })
+      setData(addItem)
+    }
+    function removeItemFromCartHandler(id) {
+      const addItem=data.filter((item)=>{
+        console.log(item);
+        if(item.id===(id) && item.Qty>=0){
+          return item.Qty=Number(item.Qty)-1
+        }
+        return item
+        
+      })
+      console.log(addItem)
+      setData(addItem)
+    }
      
-    const [cartState,dispatchCartAction]=useReducer(cartReducer,defaultCartState);
     let intialToken=localStorage.getItem('token');
     setTimeout(()=>{
       intialToken=null;
       localStorage.removeItem('token');
     },300000)
     const [token,setToken]=useState(intialToken)
-   
-    const addItemToCartHandler=(item)=>{
-        dispatchCartAction({type:'Add',item:item})
-    };
-
-    const removeItemFromCartHandler=(id)=>{
-        dispatchCartAction({type:'Remove',id:id})
-    };
-
-
-
     const userIsLoggedIn=!!token;
 
     const loginHandler=(token)=>{
@@ -83,10 +123,11 @@ const CartProvider = props=>{
     }
 
      const cartContext1 ={
-        items:cartState.items,
-        totalAmount:cartState.totalAmount,
-        addItem:addItemToCartHandler,
-        removeItem:removeItemFromCartHandler,
+        items:data,
+        showCart:showCartHandler,
+        openCart:cartOpen,
+        addItemToCart:addItemToCartHandler,
+        removeItemFromCart:removeItemFromCartHandler,
         token:token,
         isLoggedIn:userIsLoggedIn,
         login:loginHandler,

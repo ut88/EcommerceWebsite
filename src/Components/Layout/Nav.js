@@ -24,7 +24,7 @@ const Navigator = (props) => {
               {!authCtx.isLoggedIn && <NavLink  to="/ContactUs">
               <h4>Login</h4> 
               </NavLink>}
-                {authCtx.isLoggedIn && <Button onClick={removeHandler} variant='warning'>Logout</Button>}
+                {authCtx.isLoggedIn && <Button onClick={removeHandler} variant='danger'>Logout</Button>}
           {/* </Navbar.Collapse> */}
         </Container>
         {authCtx.isLoggedIn && <Button className='justify-content-end' onClick={props.show1} >Cart</Button>}
