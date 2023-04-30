@@ -1,36 +1,69 @@
-
-import React from "react";
+import CartContext from "../store/CartContext";
+import React, { useContext,useState,useRef } from "react";
 import { Button } from "react-bootstrap";
-
-const ContactUs = () => {
-  const [form, setForm] = React.useState("Submit");
-  const onSubmit = async (e) => {
+import { useNavigate } from "react-router-dom";
+const Login = () => {
+  const cartCtx=useContext(CartContext); 
+  const [login,setLogin]=useState(false);
+  const [form, setForm] = useState("Submit");
+  // const nameInputRef= useRef();
+  const emailInputRef=useRef();
+  const passwordInputRef=useRef();
+  const navigate = useNavigate ();
+  const onSubmit =(e) => {
     e.preventDefault();
-    const { name, email, number } = e.target.elements;
-    let contactData = {
-      name: name.value,
-      email: email.value,
-      number: number.value,
-    };
-    setForm("Submitting...");
-    try {
-      const response = await fetch(
-        "https://react-practice-38954-default-rtdb.firebaseio.com/contacts.json",
+    setForm("Submitting...")
+    const enterEmail=emailInputRef.current.value;
+    const enterPassword=passwordInputRef.current.value;
+      let url;
+      console.log(cartCtx.isLoggedIn)
+      if(login){
+          url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3H70FTTwTGSuNuJjexlHiIPj4MAsZR10'
+      }else{
+          url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3H70FTTwTGSuNuJjexlHiIPj4MAsZR10'
+      }
+      fetch(
+        url,
         {
           method: "POST",
-          body: JSON.stringify(contactData),
+          body:JSON.stringify({
+            email:enterEmail,
+            password:enterPassword,
+            returnSecureToken: true
+          }),
           headers: {
             "Content-Type": "application/json",
           },
         }
-      );
-      const data = await response.json();
-      console.log(data);
-      setForm("Submit");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      ).then(res=>{
+        if(res.ok){
+          return res.json();
+        }else{
+         return res.json().then(data =>{
+          let errorMessage='Authentucation failed';
+          if(data&& data.error && data.error.message){
+            errorMessage=data.error.message;
+          }
+
+          throw new Error(errorMessage)
+          }) 
+        }
+       }).then((data)=>{
+        cartCtx.login(data.idToken);
+        setForm("Submit");
+        navigate('/AvailableProduct');
+        console.log(data);
+       }).catch((err)=>{
+          alert(err.message);
+       })
+      }
+       const switchAuthModeHandler= ()=>{
+        if(login)
+        setLogin(false)
+        else
+        setLogin(true)
+       }
+  
   return (
     <div className="container mt-5">
       <h2 className="mb-3">Contact Us</h2>
@@ -45,20 +78,27 @@ const ContactUs = () => {
           <label className="form-label" htmlFor="email">
             Email
           </label>
-          <input className="form-control" type="email" id="email" required />
+          <input className="form-control" type="email" id="email" required ref={emailInputRef} />
         </div>
         <div className="mb-2">
           <label className="form-label" htmlFor="number">
-            Mobile No.
+            Password
           </label>
-          <input className="form-control" type="number" id="number" required />
+          <input className="form-control" type="password" id="number" required ref={passwordInputRef} />
         </div>
-        <Button className="btn btn-dark" type="submit">
+        <Button className="btn btn-dark " type="submit">
           {form}
         </Button>
+        <Button
+            variant="link"
+            onClick={switchAuthModeHandler}
+           >
+            {login ?  'Login with existing account' : 'Create new account'}
+          </Button>
       </form>
+    
     </div>
   );
 };
 
-export default ContactUs;
+export default Login;

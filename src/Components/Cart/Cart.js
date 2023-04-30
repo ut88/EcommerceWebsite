@@ -3,7 +3,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import Image from 'react-bootstrap/Image';
 import { CloseButton } from 'react-bootstrap';
 import { useContext } from 'react';
 import CartContext from '../store/CartContext';

@@ -2,29 +2,32 @@ import { Button, Navbar,Container, Stack } from 'react-bootstrap';
 // import Nav from 'react-bootstrap/Nav';
 import { NavLink } from 'react-router-dom';
 // import Cart from './Cart';
-
+import CartContext from '../store/CartContext';
+import { useContext } from 'react';
 const Navigator = (props) => {
-console.log(props);
+
+  const authCtx=useContext(CartContext)
+  const removeHandler=()=>{
+     authCtx.logout();
+  }
  
     return (<Stack>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant='dark'>
         <Container className='justify-content-center'>
-          {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
-          {/* <Navbar.Collapse id="responsive-navbar-nav"> */}
-      
-              <NavLink to="/Home" ><h4>Home</h4></NavLink>&nbsp;&nbsp;&nbsp;
-              <NavLink to="/AvailableProduct">
+        {authCtx.isLoggedIn &&<NavLink to="/Home" ><h4>Home</h4></NavLink>}&nbsp;&nbsp;&nbsp;
+        {authCtx.isLoggedIn && <NavLink to="/AvailableProduct">
               <h4> Store</h4> 
-              </NavLink>&nbsp;&nbsp;&nbsp;
-              <NavLink  to="/About">
+              </NavLink>}&nbsp;&nbsp;&nbsp;
+              {authCtx.isLoggedIn &&<NavLink  to="/About">
               <h4>   About</h4> 
-              </NavLink>&nbsp;&nbsp;&nbsp;
-              <NavLink  to="/ContactUs">
-              <h4>Contact Us</h4> 
-              </NavLink>
+              </NavLink>}&nbsp;&nbsp;&nbsp;
+              {!authCtx.isLoggedIn && <NavLink  to="/ContactUs">
+              <h4>Login</h4> 
+              </NavLink>}
+                {authCtx.isLoggedIn && <Button onClick={removeHandler} variant='warning'>Logout</Button>}
           {/* </Navbar.Collapse> */}
         </Container>
-        <Button className='justify-content-end' onClick={props.show1} >Cart</Button>
+        {authCtx.isLoggedIn && <Button className='justify-content-end' onClick={props.show1} >Cart</Button>}
       </Navbar>
       <Navbar className='bg-secondary  variant-primary justify-content-center  border '>
        <Navbar.Brand><h1>The Generics</h1></Navbar.Brand>
