@@ -64,9 +64,10 @@ const Login = () => {
         else
         setLogin(true)
        }
-       fetch(`https://crudcrud.com/Dashboard/2b541d2de88d46d285575e196e3a44e4/${localStorage.getItem('email')}`).then((response)=>response.json()).then((data)=>{  
+       fetch(`https://react-practice-38954-default-rtdb.firebaseio.com/${localStorage.getItem('email')}`).then((response)=>response.json()).then((data)=>{  
+        // console.log(Object.values(data))
        for(let k in data){
-            setStore(k)
+            setStore(Object.values(k))
        }
      }).catch((error)=>{console.log(error)})
       

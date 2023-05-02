@@ -87,9 +87,12 @@ const CartProvider = props=>{
         }
         return item
       })
-      const response = await fetch(`https://crudcrud.com/Dashboard/2b541d2de88d46d285575e196e3a44e4/${localStorage.getItem('email')}`,{
+      const response = await fetch(`https://react-practice-38954-default-rtdb.firebaseio.com/${localStorage.getItem('email')}.json`,{
         method:'POST',
         body:JSON.stringify(addItem),
+        headers:{
+            "Content-Type": "application/json",
+          },
     })
     let result=await response.json();
     console.log(result)
@@ -105,9 +108,12 @@ const CartProvider = props=>{
         return item
         
       })
-      const response = await fetch(`https://crudcrud.com/Dashboard/2b541d2de88d46d285575e196e3a44e4/${localStorage.getItem('email')}`,{
+      const response = await fetch(`https://react-practice-38954-default-rtdb.firebaseio.com/${localStorage.getItem('email')}.json`,{
         method:'POST',
         body:JSON.stringify(addItem),
+        headers:{
+            "Content-Type": "application/json",
+          },
     })
       setData(addItem)
     }
