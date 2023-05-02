@@ -1,9 +1,7 @@
 import React from 'react'
 import { Row,Col, Button, Container } from 'react-bootstrap'
 import CartItem from './CartItem'
-// import CartContext from '../store/CartContext'
 const Cart = (props) => {
-    // const details=useContext(CartContext)
   return (
     <div className='container' style={{width: 'auto',
         height: 'max-content',

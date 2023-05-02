@@ -9,6 +9,7 @@ const Navigator = (props) => {
   const authCtx=useContext(CartContext)
   const removeHandler=()=>{
      authCtx.logout();
+     localStorage.removeItem('email')
   }
  
     return (<Stack>

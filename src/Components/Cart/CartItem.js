@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import CartContext from "../store/CartContext";
 import { Row, Col, Card , Button} from "react-bootstrap";
-const CartItem = () => {
+const CartItem =  () => {
   const details = useContext(CartContext);
+  
   let total = 0;
   function remove(e){
     details.removeItemFromCart(e.target.id)

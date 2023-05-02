@@ -6,7 +6,7 @@ const Login = () => {
   const cartCtx=useContext(CartContext); 
   const [login,setLogin]=useState(false);
   const [form, setForm] = useState("Submit");
-  // const nameInputRef= useRef();
+  const [store,setStore]=useState([]);
   const emailInputRef=useRef();
   const passwordInputRef=useRef();
   const navigate = useNavigate ();
@@ -15,6 +15,7 @@ const Login = () => {
     setForm("Submitting...")
     const enterEmail=emailInputRef.current.value;
     const enterPassword=passwordInputRef.current.value;
+    cartCtx.email(enterEmail)
       let url;
       console.log(cartCtx.isLoggedIn)
       if(login){
@@ -36,6 +37,7 @@ const Login = () => {
           },
         }
       ).then(res=>{
+        setForm("Submit");
         if(res.ok){
           return res.json();
         }else{
@@ -50,7 +52,6 @@ const Login = () => {
         }
        }).then((data)=>{
         cartCtx.login(data.idToken);
-        setForm("Submit");
         navigate('/AvailableProduct');
         console.log(data);
        }).catch((err)=>{
@@ -63,7 +64,14 @@ const Login = () => {
         else
         setLogin(true)
        }
-  
+       fetch(`https://crudcrud.com/Dashboard/2b541d2de88d46d285575e196e3a44e4/${localStorage.getItem('email')}`).then((response)=>response.json()).then((data)=>{  
+       for(let k in data){
+            setStore(k)
+       }
+     }).catch((error)=>{console.log(error)})
+      
+     console.log(store)
+     cartCtx.startData(store)
   return (
     <div className="container mt-5">
       <h2 className="mb-3">Contact Us</h2>

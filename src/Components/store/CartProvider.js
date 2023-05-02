@@ -80,35 +80,39 @@ const CartProvider = props=>{
           setCartOpen(true)
         }
     }
-    function addItemToCartHandler(id) {
+    async function addItemToCartHandler(id) {
       const addItem=data.filter((item)=>{
-        console.log(item);
         if(item.id===(id)){
           return item.Qty=Number(item.Qty)+1
         }
         return item
-        
       })
+      const response = await fetch(`https://crudcrud.com/Dashboard/2b541d2de88d46d285575e196e3a44e4/${localStorage.getItem('email')}`,{
+        method:'POST',
+        body:JSON.stringify(addItem),
+    })
+    let result=await response.json();
+    console.log(result)
       setData(addItem)
     }
-    function removeItemFromCartHandler(id) {
+   async function removeItemFromCartHandler(id) {
       const addItem=data.filter((item)=>{
         console.log(item);
         if(item.id===(id) && item.Qty>=0){
-          return item.Qty=Number(item.Qty)-1
+         return item.Qty=Number(item.Qty)-1
         }
+        
         return item
         
       })
-      console.log(addItem)
+      const response = await fetch(`https://crudcrud.com/Dashboard/2b541d2de88d46d285575e196e3a44e4/${localStorage.getItem('email')}`,{
+        method:'POST',
+        body:JSON.stringify(addItem),
+    })
       setData(addItem)
     }
      
     let intialToken=localStorage.getItem('token');
-    setTimeout(()=>{
-      intialToken=null;
-      localStorage.removeItem('token');
-    },300000)
     const [token,setToken]=useState(intialToken)
     const userIsLoggedIn=!!token;
 
@@ -122,6 +126,14 @@ const CartProvider = props=>{
         localStorage.removeItem('token');
     }
 
+    const emailHandler=(e)=>{
+       localStorage.setItem("email", e.replace("@", "").replace(".", ""))
+    }
+  
+    const startDataHandler=(val)=>{
+      setData(val);
+    }
+
      const cartContext1 ={
         items:data,
         showCart:showCartHandler,
@@ -131,7 +143,9 @@ const CartProvider = props=>{
         token:token,
         isLoggedIn:userIsLoggedIn,
         login:loginHandler,
-        logout:logoutHandler
+        logout:logoutHandler,
+        email:emailHandler,
+        startData:startDataHandler
      }
 
     return(<CartContext.Provider value={cartContext1}>

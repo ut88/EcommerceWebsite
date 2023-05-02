@@ -5,7 +5,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import CartProvider from './Components/store/CartProvider';
-
+// eslint-disable-next-line
 import "../node_modules/react-bootstrap/dist/react-bootstrap"
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
