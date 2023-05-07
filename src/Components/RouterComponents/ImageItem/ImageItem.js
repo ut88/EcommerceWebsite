@@ -11,10 +11,10 @@ const ImageItem = (props) => {
 
     const details = useContext(CartContext);
     function addItemToCart(e) {
-      details.addItemToCart(e.target.id);
+        details.addItemToCart(e.target.id);
     }
 
-  
+
     return (<>
         <Container>
             <Row >
@@ -28,24 +28,25 @@ const ImageItem = (props) => {
                 </Col>
             </Row>
             <Row className="text-center">
-            <h1>{`$${props.price}`} </h1> <div><Link to="/product" state={{
-                items:{
+                <h1>{`$${props.price}`} </h1> <div><Link to="/product" state={{
+                    items: {
 
-id: props.id,
+                        id: props.id,
 
-title: props.title,
+                        title: props.title,
 
-price: props.price,
+                        price: props.price,
 
-imageUrl: props.imageUrl,
+                        imageUrl: props.imageUrl,
 
-subHeading: props.subHeading,
+                        subHeading: props.subHeading,
 
-review:props.review,
-Qty:props.Qty
+                        review: props.review,
+                        Qty: props.Qty
 
-}}} >See Details</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Button variant="primary" onClick={addItemToCart} size="lg" id={props.id}>Add To Cart</Button></div>
+                    }
+                }} >See Details</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button variant="primary" onClick={addItemToCart} size="lg" id={props.id}>Add To Cart</Button></div>
             </Row>
         </Container></>)
 }

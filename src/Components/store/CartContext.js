@@ -1,15 +1,15 @@
-import  React from "react";
+import React from "react";
 
-const CartContext=React.createContext({
-    items:[],
-    openCart:false,
-    showCart:(item)=>{},
-    addItemToCart:(id)=>{},
-    removeItemFromCart:(id)=>{},
-    token:'',
-    isLoggedIn:null,
-    login:(token)=>{},
-    logout:()=>{}
+const CartContext = React.createContext({
+    items: [],
+    openCart: false,
+    showCart: (item) => { },
+    addItemToCart: (id) => { },
+    removeItemFromCart: (id) => { },
+    token: '',
+    isLoggedIn: null,
+    login: (token) => { },
+    logout: () => { }
 
 });
 

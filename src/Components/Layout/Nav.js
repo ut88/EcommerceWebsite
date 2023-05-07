@@ -4,9 +4,9 @@ import CartContext from '../store/CartContext';
 import { useContext } from 'react';
 const Navigator = (props) => {
   const authCtx = useContext(CartContext)
-  const numberOfCartItems=(JSON.parse(localStorage.getItem("cartItem"))===null)?[]:JSON.parse(localStorage.getItem("cartItem")).reduce((curNumber,item)=>{
-      return curNumber+item.Qty
-},0);
+  const numberOfCartItems = (JSON.parse(localStorage.getItem("cartItem")) === null) ? 0 : JSON.parse(localStorage.getItem("cartItem")).reduce((curNumber, item) => {
+    return curNumber + item.Qty
+  }, 0);
 
   const removeHandler = async () => {
     const obj = {
