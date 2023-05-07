@@ -45,7 +45,7 @@ review:props.review,
 Qty:props.Qty
 
 }}} >See Details</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Button variant="primary" onClick={addItemToCart} size="lg" id={props.id} >Add To Cart</Button></div>
+            <Button variant="primary" onClick={addItemToCart} size="lg" id={props.id}>Add To Cart</Button></div>
             </Row>
         </Container></>)
 }

@@ -1,6 +1,4 @@
 import Row from "react-bootstrap/Row";
-
-
 import ImageItem from "./ImageItem";
 const productsArr = [
 

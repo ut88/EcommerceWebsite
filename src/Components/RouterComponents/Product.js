@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Image } from "react-bootstrap";
 import "./Product.css"
 import Card from 'react-bootstrap/Card';
@@ -8,7 +7,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 const ProductItem = (props) => {
     
   const location = useLocation();
-  console.log(location.state);
   const { items } = location.state
   return (  <>
     <Card>

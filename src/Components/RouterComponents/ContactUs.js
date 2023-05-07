@@ -1,23 +1,21 @@
 import CartContext from "../store/CartContext";
-import React, { useContext,useState,useRef } from "react";
+import React, { useContext,useState,useRef} from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+
 const Login = () => {
   const cartCtx=useContext(CartContext); 
   const [login,setLogin]=useState(false);
   const [form, setForm] = useState("Submit");
-  const [store,setStore]=useState([]);
+  const [store,setStore]=useState({});
   const emailInputRef=useRef();
   const passwordInputRef=useRef();
-  const navigate = useNavigate ();
+  // const navigate = useNavigate ();
   const onSubmit =(e) => {
     e.preventDefault();
     setForm("Submitting...")
     const enterEmail=emailInputRef.current.value;
     const enterPassword=passwordInputRef.current.value;
-    cartCtx.email(enterEmail)
       let url;
-      console.log(cartCtx.isLoggedIn)
       if(login){
           url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3H70FTTwTGSuNuJjexlHiIPj4MAsZR10'
       }else{
@@ -51,28 +49,45 @@ const Login = () => {
           }) 
         }
        }).then((data)=>{
+        localStorage.setItem("email", enterEmail.replace("@", "").replace(".", ""))
         cartCtx.login(data.idToken);
-        navigate('/AvailableProduct');
         console.log(data);
        }).catch((err)=>{
           alert(err.message);
        })
       }
-       const switchAuthModeHandler= ()=>{
+       const switchAuthModeHandler=()=>{
         if(login)
         setLogin(false)
         else
         setLogin(true)
        }
-       fetch(`https://react-practice-38954-default-rtdb.firebaseio.com/${localStorage.getItem('email')}`).then((response)=>response.json()).then((data)=>{  
-        // console.log(Object.values(data))
-       for(let k in data){
-            setStore(Object.values(k))
-       }
-     }).catch((error)=>{console.log(error)})
+       class Data {
+        constructor(q1, q2, q3, q4) {
+          this.q1 = q1;
+          this.q2 = q2;
+          this.q3 = q3;
+          this.q4 = q4;
+        }
+      }
       
-     console.log(store)
-     cartCtx.startData(store)
+       if(cartCtx.isLoggedIn){
+       fetch(`https://react-practice-38954-default-rtdb.firebaseio.com/${localStorage.getItem('email')}.json`).then(res=>res.json())
+       .then((response)=>{
+        for(let k in response){
+          var obj = new Data(
+            response[k].q1,
+            response[k].q2,
+            response[k].q3,
+            response[k].q4
+          )  
+          setStore(obj)
+       }
+       console.log(obj)
+       cartCtx.startData(store)
+     }).catch((error)=>{console.log(error)})
+    }
+    console.log(cartCtx.isLoggedIn)
   return (
     <div className="container mt-5">
       <h2 className="mb-3">Contact Us</h2>
