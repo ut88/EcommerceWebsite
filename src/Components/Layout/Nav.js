@@ -15,17 +15,16 @@ const Navigator = (props) => {
       q3: authCtx.items[2].Qty,
       q4: authCtx.items[3].Qty
     }
-    const response = await fetch(`https://react-practice-38954-default-rtdb.firebaseio.com/${localStorage.getItem('email')}.json`, {
+     await fetch(`https://react-practice-38954-default-rtdb.firebaseio.com/${localStorage.getItem('email')}.json`, {
       method: 'PUT',
       body: JSON.stringify(obj),
       headers: {
         "Content-Type": "application/json",
       },
     })
-    let result = await response.json();
-    console.log(result)
     localStorage.removeItem('email')
     authCtx.logout();
+    localStorage.removeItem("cartItem")
   }
 
   return (<Stack>

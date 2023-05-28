@@ -13,9 +13,7 @@ const Login = () => {
     setForm("Submitting...");
     const enterEmail = emailInputRef.current.value;
     const enterPassword = passwordInputRef.current.value;
-
     let url;
-
     if (login) {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3H70FTTwTGSuNuJjexlHiIPj4MAsZR10";
@@ -37,18 +35,15 @@ const Login = () => {
 
     const data = await response.json();
 
-    console.log(data)
-
-    const productDataArray = await fetch(
-      `https://react-practice-38954-default-rtdb.firebaseio.com/${data.email.replace("@", "").replace(".", "")}.json`
-    );
-
-    const productData = await productDataArray.json()
-
-    console.log(productData)
-
-    cartCtx.startData(productData)
-
+    if (login) {
+      const productDataArray = await fetch(
+        `https://react-practice-38954-default-rtdb.firebaseio.com/${data.email.replace("@", "").replace(".", "")}.json`
+      );
+  
+      const productData = await productDataArray.json()
+  
+      cartCtx.startData(productData)
+    }
     setForm("Submit");
 
     localStorage.setItem("email", enterEmail.replace("@", "").replace(".", ""));
